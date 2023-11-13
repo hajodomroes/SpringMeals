@@ -1,0 +1,17 @@
+body {
+background: rgba(163, 194, 194, 0.3);
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  opacity: 1;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+  outline-color: black;
+  opacity: 1;
+}
+p.solid {outline-style: solid;}

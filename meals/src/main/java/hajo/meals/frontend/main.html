@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MealsGenereator</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Wie heißt das Gericht <input  id="meal"/></h1>
+
+<br>
+
+<label for="complexLvl">Schwierigkeit:
+    <select name="complexLvl" id="complexLvl">
+        <option value="easy">easy</option>
+        <option value="hard">hard</option>
+    </select>
+</label>
+
+<label for="browsers">
+    <input list="browsers">
+
+    <datalist id="browsers">
+        <option value="Internet Explorer">
+        <option value="Firefox">
+        <option value="Google Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+</label>
+
+
+<br>
+
+<button onclick="submitFunction(meal.value)">Submit</button>
+</body>
+</html>
