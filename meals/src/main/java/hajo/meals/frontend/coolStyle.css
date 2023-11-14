@@ -1,0 +1,143 @@
+// reset
+* {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  box-sizing: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ecf0f1;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: normal;
+}
+
+form {
+  display: block;
+}
+
+label,
+input {
+  display: block;
+}
+
+// extends
+.animate {
+  transition: all 0.3s;
+}
+
+// main styles
+main {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.main-heading {
+  line-height: 100%;
+  font-weight: 600;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  border: 0;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  @extend .animate;
+
+  span {
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    @extend .animate;
+
+    .fa {
+      margin-left: 8px;
+      font-size: 18px;
+      vertical-align: middle;
+    }
+  }
+
+  &:not(.btn-outline) {
+    background-color: #fff;
+
+    span {
+      color: #666;
+    }
+
+    &:hover {
+      background-color: #f7f7f7;
+    }
+  }
+
+  &.btn-outline {
+    background-color: transparent;
+    border: 1px solid #fff;
+
+    span {
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: #fff;
+
+      span {
+        color: #666;
+      }
+    }
+  }
+}
+
+.popup-trigger {
+  width: 175px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 25px 0 rgba(0,0,0,.05);
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  float: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(200px);
+  transition: opacity 0.5s, transform 0.5s, z-index 0s 0.5s;
+
+  .overlay-background {
+    background-color: rgba(44,62,80,.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-in

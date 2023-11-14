@@ -1,11 +1,24 @@
 body {
-background: rgba(163, 194, 194, 0.3);
+background: #ecf0f1;
 }
 
 h1 {
-  color: white;
+  color: black;
   text-align: center;
   opacity: 1;
+}
+
+.button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 p {
