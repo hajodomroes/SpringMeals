@@ -12,9 +12,13 @@
 
 <h1></h1>
 
-<button type="button" class="button" id="openInput" onclick="openInputDialog()"/>
+<button type="button" class="button" id="openInput" onclick="openInputDialog()"></button>
 
 <dialog id="inputDialog">
+    <menu>
+        <li><button id="save">Save for later</button></li>
+        <li><button id="share">Share this news</button></li>
+    </menu>
     Wie heißt das Gericht <input  id="meal"/>
         <label for="complexLvl">Schwierigkeit:
             <select name="complexLvl" id="complexLvl">
@@ -34,6 +38,7 @@
                 <option value="Safari">
             </datalist>
         </label>
+        <button id="closeButton" onclick="closeInputDialog()">Close Dialog</button>
 
         <label  for="submitButton">
             <button id="submitButton" onclick="submitFunction(meal.value)">Submit</button>
