@@ -12,44 +12,34 @@
 
 <h1></h1>
 
-<button type="button" class="button" id="openInput" onclick="openInputDialog()"></button>
+<button type="button" class="button" id="openInput" onclick="openInputDialog()">add Meal</button>
 
 <dialog id="inputDialog">
-    <menu>
-        <li><button id="save">Save for later</button></li>
-        <li><button id="share">Share this news</button></li>
-    </menu>
-    Wie heißt das Gericht <input  id="meal"/>
-        <label for="complexLvl">Schwierigkeit:
-            <select name="complexLvl" id="complexLvl">
-                <option value="easy">easy</option>
-                <option value="hard">hard</option>
-            </select>
-        </label>
+    Wie heißt das Gericht <input id="meal"/>
+    <label for="complexLvl">Schwierigkeit:
+        <select name="complexLvl" id="complexLvl">
+            <option value="easy">easy</option>
+            <option value="hard">hard</option>
+        </select>
+    </label>
 
-        <label for="browsers">
-            <input list="browsers">
+    <label for="browsers">
+        <input list="browsers">
 
-            <datalist id="browsers">
-                <option value="Internet Explorer">
-                <option value="Firefox">
-                <option value="Google Chrome">
-                <option value="Opera">
-                <option value="Safari">
-            </datalist>
-        </label>
-        <button id="closeButton" onclick="closeInputDialog()">Close Dialog</button>
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Google Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+    </label>
+    <button id="closeButton" onclick="closeInputDialog()">Close Dialog</button>
 
-        <label  for="submitButton">
-            <button id="submitButton" onclick="submitFunction(meal.value)">Submit</button>
-        </label>
+    <div class="flex flex-space-between">
+        <button id="close_dialog">Close</button>
+        <button id="submitButton" onclick="submitFunction(meal.value)">Submit</button>
+    </div>
 </dialog>
-
-<br>
-
-
-
-
-<br>
 </body>
 </html>
