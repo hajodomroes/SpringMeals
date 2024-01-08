@@ -10,36 +10,66 @@
 
 <body>
 
-<h1></h1>
+<br/>
+<!--
+    <button onclick="test()">Test</button>
+    <button type="button" class="button" id="openInput" onclick="openInputDialog()">add Meal</button>
 
-<button type="button" class="button" id="openInput" onclick="openInputDialog()">add Meal</button>
+    <dialog id="inputDialog">
+        <div id="mealName">
+            Wie heißt das Gericht <input id="meal"/>
+        </div>
 
-<dialog id="inputDialog">
-    Wie heißt das Gericht <input id="meal"/>
-    <label for="complexLvl">Schwierigkeit:
-        <select name="complexLvl" id="complexLvl">
-            <option value="easy">easy</option>
-            <option value="hard">hard</option>
-        </select>
-    </label>
+        <div id="mealComplexLvl">
+            <label for="complexLvl">Schwierigkeit:
+                <select name="complexLvl" id="complexLvl">
+                    <option value="easy">easy</option>
+                    <option value="hard">hard</option>
+                </select>
+            </label>
+        </div>
 
-    <label for="browsers">
-        <input list="browsers">
+        <div class="flex flex-space-between">
+            <button id="cancelButton" onclick="closeInputDialog()">Cancel</button>
+            <button id="submitButton" onclick="submitFunction(meal.value)">Submit</button>
+        </div>
+    </dialog>
+-->
 
-        <datalist id="browsers">
-            <option value="Internet Explorer">
-            <option value="Firefox">
-            <option value="Google Chrome">
-            <option value="Opera">
-            <option value="Safari">
-        </datalist>
-    </label>
-    <button id="closeButton" onclick="closeInputDialog()">Close Dialog</button>
+    <div class="mealForm">
+        <div class="row">
+            <div class="colTop">Name</div>
+            <div class="colTop">Easy/Hard</div>
+            <div class="colTop">Ingredients</div>
+            <div class="colTop">Category</div>
+        </div>
 
-    <div class="flex flex-space-between">
-        <button id="close_dialog">Close</button>
-        <button id="submitButton" onclick="submitFunction(meal.value)">Submit</button>
+        <div class="row">
+            <div class="col">
+                <input id="name" placeholder="e.g. Spaghetti">
+            </div>
+            <div class="col">
+                <select id="lvl">
+                    <option value="" disabled selected>---</option>
+                    <option>easy</option>
+                    <option>hard</option>
+                </select>
+            </div>
+            <div class="col">
+                <input id="ingrediants" multiple>
+            </div>
+            <div class="col">
+                <select id="category">
+                    <option value="" disabled selected>---</option>
+                    <option>Nudeln</option>
+                    <option>Fleisch</option>
+                    <option>Auflauf</option>
+                </select>
+            </div>
+        </div>
     </div>
-</dialog>
+
+    <button type="button" class="button" id="submitMeal" onclick="submitMeal(name.value)">Submit Meal</button>
+
 </body>
 </html>

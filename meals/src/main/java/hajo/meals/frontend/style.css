@@ -1,45 +1,63 @@
 body {
-background-color: #323232;
-		color: #ccc;
-}
-
-h1 {
-  color: black;
-  text-align: center;
-  opacity: 1;
+    background-color: #323232;
+    color: #ccc;
+    font-family: Montserrat, Arial, sans-serif;
 }
 
 dialog {
-  border: none !important;
-  border-radius: calc(5px * var(--ratio));
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  padding: 1.6rem;
-  max-width: 400px;
+    color: #FAF5EF;
+    display: grid;
+    background-color: #373737;
+    border: none;
+    max-width: 500px;
+}
+
+.mealForm {
+    width: 50%;
+    background-color: #252525;
 }
 
 .button {
-  background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.colTop {
+    width: 25%;
+    font-size: 20px;
+}
+
+.col {
+    width: 25%;
+}
+
+.formDiv {
+    color: #FAF5EF;
+    background-color: #373737;
 }
 
 #inputDialog header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 p {
-  font-family: verdana;
-  font-size: 20px;
-  outline-color: black;
-  opacity: 1;
+    font-family: verdana;
+    font-size: 20px;
+    outline-color: black;
+    opacity: 1;
 }
-p.solid {outline-style: solid;}
