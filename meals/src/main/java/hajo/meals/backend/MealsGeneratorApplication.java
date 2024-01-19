@@ -1,13 +1,13 @@
-package hajo.meals;
+package hajo.meals.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MealsPlannerApplication {
+public class MealsGeneratorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MealsPlannerApplication.class, args);
+		SpringApplication.run(MealsGeneratorApplication.class, args);
 	}
 
 }

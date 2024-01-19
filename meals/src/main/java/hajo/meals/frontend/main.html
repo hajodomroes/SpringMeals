@@ -4,46 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <title>MealsGenereator</title>
-    <script src="./css/script.js"></script>
+    <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
-    <br/>
-    <div class="mealForm">
-        <div class="row">
-            <div class="colTop">Name</div>
-            <div class="colTop">Easy/Hard</div>
-            <div class="colTop">Ingredients</div>
-            <div class="colTop">Category</div>
-        </div>
+<body data-bs-theme="dark">
+<h1 align="center"><b>Meals Generator</b></h1>
+<br/>
 
+<form id="addMealForm">
+    <div class="form-group">
+        <label for="inputMealName">Meal name</label>
+        <input class="form-control" id="inputMealName" placeholder="Enter meal name">
+    </div>
+
+    <br/>
+
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="selectComplexLvl">
+        <label class="form-check-label" for="selectComplexLvl">Not Monday - Wednesday</label>
+    </div>
+
+    <br/>
+
+    <div class="form-group" id="mealTableBody">
         <div class="row">
-            <div class="col">
-                <input id="name" placeholder="e.g. Spaghetti">
-            </div>
-            <div class="col">
-                <select id="lvl">
-                    <option value="" disabled selected>---</option>
-                    <option>easy</option>
-                    <option>hard</option>
-                </select>
-            </div>
-            <div class="col">
-                <input id="ingrediants" multiple>
-            </div>
-            <div class="col">
-                <select id="category">
-                    <option value="" disabled selected>---</option>
-                    <option>Nudeln</option>
-                    <option>Fleisch</option>
-                    <option>Auflauf</option>
-                </select>
-            </div>
+            <div class="col">Name</div>
+            <div class="col">Menge</div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row">
+            <input class="col form-control">
+            <input class="col form-control">
+            <button class="col-1 btn btn-primary" onclick="addRow(event)">
+                <i class="fa fa-plus"></i>
+            </button>
+            <button class="col-1 btn btn-primary" onclick="deleteRow(event)">
+                <i class="fa fa-trash"></i>
+            </button>
         </div>
     </div>
 
-    <button type="button" class="button" id="submitMeal" onclick="submitMeal(name.value)">Submit Meal</button>
+    <div class="form-group">
+        <label for="inputIngredients">Old Ingredients</label>
+        <input class="form-control" id="inputIngredients"
+               placeholder="Please enter ingredients as an Array, e.g. [Feta, Nudeln 500g, ...]">
+    </div>
+    <div class="form-group">
+        <label for="inputCategory">Category</label>
+        <select class="form-select" id="inputCategory">
+            <option value="" disabled selected>---</option>
+            <option>Nudeln</option>
+            <option>Fleisch</option>
+            <option>Auflauf</option>
+            <option>Kartoffeln</option>
+            <option>Reis</option>
+        </select>
+    </div>
+    <br/>
+    <button class="btn btn-primary" onclick="sendData()">Submit</button>
+</form>
+
+<div id="testDisplay" class="container">Hier sollte die Meal JSON angezeigt werden</div>
+<div id="backendResponse" class="container"></div>
+
+<br/>
+<br/>
+
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Ingredients</th>
+        <th scope="col">Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Monday</th>
+        <td>Spagehtti</td>
+        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
+        <td>Nudeln</td>
+    </tr>
+    <tr>
+        <th scope="row">Tuesday</th>
+        <td>Spagehtti</td>
+        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
+        <td>Nudeln</td>
+    </tr>
+    <tr>
+        <th scope="row">Wednesday</th>
+        <td>Spagehtti</td>
+        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
+        <td>Nudeln</td>
+    </tr>
+    <tr>
+        <th scope="row">Thursday</th>
+        <td>Spagehtti</td>
+        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
+        <td>Nudeln</td>
+    </tr>
+    <tr>
+        <th scope="row">Saturday</th>
+        <td>Spagehtti</td>
+        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
+        <td>Nudeln</td>
+    </tr>
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary">Print shopping list</button>
+<button type="submit" class="btn btn-warning">Regenerate list</button>
 
 </body>
 </html>
