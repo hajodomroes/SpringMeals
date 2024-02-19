@@ -1,10 +1,4 @@
-function submitMeal() {
-    name = document.getElementById("name").value;
-    lvl = document.getElementById("lvl").value;
-    ingredients = document.getElementById("ingredients").value;
-    category = document.getElementById("category").value;
-}
-function addRow(event) {
+    function addRow(event) {
         event.preventDefault();
 
         var tableBody = document.getElementById("mealTableBody");
@@ -52,32 +46,34 @@ function addRow(event) {
         }
 
     function getAllRowsData() {
-        var mealTableBody = document.getElementById("mealTableBody");
-        var rows = mealTableBody.getElementsByClassName("row");
 
-        var rowDataArray = [];
+            var mealTableBody = document.getElementById("mealTableBody");
+            var rows = mealTableBody.getElementsByClassName("row");
 
-        for (var i = 0; i < rows.length; i++) {
-            var row = rows[i];
-            var nameInput = row.querySelector("input:nth-of-type(1)");
-            var quantityInput = row.querySelector("input:nth-of-type(2)");
+            var rowDataList = [];
 
-            var rowData = {
-                name: nameInput.value,
-                quantity: quantityInput.value
-            };
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var nameInput = row.querySelector("input:nth-of-type(1)");
+                var quantityInput = row.querySelector("input:nth-of-type(2)");
 
-            rowDataArray.push(rowData);
+                // Überprüfe, ob die Eingabefelder vorhanden sind
+                if (nameInput && quantityInput) {
+                    var rowData = [
+                        nameInput.value,
+                        quantityInput.value
+                    ];
+                    rowDataList.push(rowData);
+                }
+            }
+            return rowDataList;
         }
 
-        return rowDataArray;
-    }
-
-function sendData() {
+    function sendData() {
             const inputName = document.getElementById('inputMealName').value;
             const inputMonWed = document.getElementById('selectComplexLvl').checked;
             const inputIngredients = getAllRowsData();
-            const inputIngredients = document.getElementById('inputIngredients').value;
+            //const inputIngredients = document.getElementById('inputIngredients').value;
             const inputCategory = document.getElementById('inputCategory').value;
 
             const requestData = {
@@ -107,7 +103,7 @@ function sendData() {
 
             event.preventDefault();
         }
-function test() {
+    function test() {
             fetch('http://localhost:8080/api/test', {
                             method: 'POST',
                             headers: {
@@ -121,4 +117,4 @@ function test() {
                             alert(data);
                         })
                         .catch(error => console.error('Error: ', error));
-            }
+    }
