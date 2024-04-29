@@ -1,11 +1,11 @@
 package hajo.meals.backend;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Array;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -15,37 +15,67 @@ public class Controller {
     public String sayHello() {
         return "Hello from Spring Web!";
     }
+    /*
+    @PostMapping("/addMeal/{name}/{onlyMonWed}/{ingredients}/{category}")
+    public String processData(@PathVariable String name, @PathVariable Integer onlyMonWed, @PathVariable HashMap<String, String> ingredients, @PathVariable String category) {
+        /*
+        InsertApp insertApp = new InsertApp();
+        insertApp.insertMeal(2, name, onlyMonWed, category);
+        insertApp.insertIngredients(name, ingredients);
+
+
+        return "Successfully added following meal to database: ";
+    }
+    */
 
     @PostMapping("/addMeal")
-    public String processData(@RequestBody String mealString) {
-        JSONObject jsonObject = new JSONObject(mealString);
-        String name = jsonObject.getString("name");
-        boolean monWed = jsonObject.getBoolean("monWed");
-        JSONArray ingredients = jsonObject.getJSONArray("ingredients");
-        String category = jsonObject.getString("category");
+    public String processData(@RequestBody Map<String, Object> meal) {
+        String name = meal.get("name").toString();
+        //String notMonWed = (String) meal.get("notMonWed");
+        HashMap<String, String> ingredients = (HashMap<String, String>) meal.get("ingredients");
+        String category = meal.get("category").toString();
 
-        String[] array = extractIngredients(ingredients);
-        /**
-        Object currentIngredient;
-        String currentName;
-        String currentQuantity;
-        for(int i = 0; i<ingredients.length(); i++) {
-            currentIngredient = ingredients.get(i);
-            currentName = currentIngredient[0];
 
-        }
-        **/
+        System.out.println(name.length());
+        InsertApp insertApp = new InsertApp();
 
-        return "Successfully added following meal to database: " + mealString;
+        insertApp.insertMeal(name, "0", category);
+        insertApp.insertIngredients(name, ingredients);
+
+
+        SelectApp selectApp = new SelectApp();
+        System.out.println("\nMeals:");
+        selectApp.printAllMeals();
+        System.out.println("\nIngredients:");
+        selectApp.printAllIngredients();
+
+        return "Success: " + meal.toString();
     }
 
-    public static String[] extractIngredients(String[][] ingredients) {
-        Array<String> listArray = new Array<List<String>>;
-        for (String[] ingredient : ingredients) {
-            String name = ingredient[0];
-            String quantity = ingredient[1];
+    @GetMapping("/allMeals")
+    public ResponseEntity<ArrayList<MealResponseObject>> getAllMeals() {
+        SelectApp selectApp = new SelectApp();
+        ArrayList<MealResponseObject> meals = selectApp.SelectAllMeals();
+        return ResponseEntity.ok().body(meals);
+    }
 
-        }
+    @GetMapping("/queryMealsByCategoryCount")
+    public ResponseEntity<ArrayList<MealResponseObject>> queryMealsByCategoryCount(@RequestParam String category1Count, @RequestParam String category2Count,
+                                                                                   @RequestParam String category3Count, @RequestParam String category4Count,
+                                                                                   @RequestParam String category5Count, @RequestParam String category6Count,
+                                                                                   @RequestParam String category7Count)
+    {
+        Integer category1 = Integer.parseInt(category1Count);
+        Integer category2 = Integer.parseInt(category2Count);
+        Integer category3 = Integer.parseInt(category3Count);
+        Integer category4 = Integer.parseInt(category4Count);
+        Integer category5 = Integer.parseInt(category5Count);
+        Integer category6 = Integer.parseInt(category6Count);
+        Integer category7 = Integer.parseInt(category7Count);
+
+        SelectApp selectApp = new SelectApp();
+        ArrayList<MealResponseObject> meals = selectApp.queryMealsByCategoryCount(category1, category2, category3, category4, category5, category6, category7);
+        return ResponseEntity.ok().body(meals);
     }
 
     @PostMapping("/test")

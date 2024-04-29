@@ -1,10 +1,8 @@
 package hajo.meals.backend;
 
-import java.sql.*;
-import java.util.Arrays;
-
 public class JDBC {
     public static void main(String[] args) {
+        /*
         String url = "jdbc:mysql://localhost:3306/mealsdatabase";
         String username = "root";
         String password = "N7v8fEHHnZCr3X";
@@ -32,5 +30,7 @@ public class JDBC {
         } catch (Exception e){
             System.out.println("Error in Connection: " + e);
         }
+
+         */
     }
 }

@@ -2111,7 +2111,6 @@ progress {
   font-size: 0.875em;
   color: var(--bs-secondary-color);
 }
-
 .form-control {
   display: block;
   width: 100%;
@@ -2129,6 +2128,7 @@ progress {
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;

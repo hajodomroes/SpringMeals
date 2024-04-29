@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,29 @@
     <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body data-bs-theme="dark">
-<h1 align="center"><b>Meals Generator</b></h1>
-<br/>
+<div class="center">
+<pre>
 
-<form id="addMealForm">
+███╗   ███╗ ███████╗  █████╗  ██╗       ██████╗      ██████╗  ███████╗ ███╗  ██╗ ███████╗ ██████╗   █████╗  ████████╗  █████╗  ██████╗
+████╗ ████║ ██╔════╝ ██╔══██╗ ██║      ██╔════╝     ██╔════╝  ██╔════╝ ████╗ ██║ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝ ██╔══██╗ ██╔══██╗
+██╔████╔██║ █████╗   ███████║ ██║      ╚█████╗      ██║  ██╗  █████╗   ██╔██╗██║ █████╗   ██████╔╝ ███████║    ██║    ██║  ██║ ██████╔╝
+██║╚██╔╝██║ ██╔══╝   ██╔══██║ ██║       ╚═══██╗     ██║  ╚██╗ ██╔══╝   ██║╚████║ ██╔══╝   ██╔══██╗ ██╔══██║    ██║    ██║  ██║ ██╔══██╗
+██║ ╚═╝ ██║ ███████╗ ██║  ██║ ███████╗ ██████╔╝     ╚██████╔╝ ███████╗ ██║ ╚███║ ███████╗ ██║  ██║ ██║  ██║    ██║    ╚█████╔╝ ██║  ██║
+
+</pre>
+</div>
+<!------------------- Navigating Bar -------------------->
+<div class="topnav">
+    <a class="active" href="#mealsGenerator" onclick="showmealsGenerator()" id="mealsGeneratorButton">Meals Generator</a>
+    <a href="#addMeal" onclick="showAddMealToDB()" id="addMealsToDBButton">Add meal to DB</a>
+</div>
+
+<br/>
+<!------------------- Add Meal to DB Form -------------------->
+<form id="addMealForm" class="hiddenOnStart">
+    <h1 align="center"><b>Add meal to DB</b></h1>
+    <br/>
     <div class="form-group">
         <label for="inputMealName">Meal name</label>
         <input class="form-control" id="inputMealName" placeholder="Enter meal name">
@@ -23,8 +40,8 @@
     <br/>
 
     <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="selectComplexLvl">
-        <label class="form-check-label" for="selectComplexLvl">Not Monday - Wednesday</label>
+        <input type="checkbox" class="form-check-input" id="notMonWed">
+        <label class="form-check-label" for="notMonWed">Meal cannot be cooked from Monday - Wednesday</label>
     </div>
 
     <br/>
@@ -32,7 +49,7 @@
     <div class="form-group" id="mealTableBody">
         <div class="row">
             <div class="col">Name</div>
-            <div class="col">Menge</div>
+            <div class="col">Quantity</div>
             <div class="col-2"></div>
         </div>
         <div class="row">
@@ -48,78 +65,81 @@
     </div>
 
     <div class="form-group">
-        <label for="inputIngredients">Old Ingredients</label>
-        <input class="form-control" id="inputIngredients"
-               placeholder="Please enter ingredients as an Array, e.g. [Feta, Nudeln 500g, ...]">
-    </div>
-    <div class="form-group">
         <label for="inputCategory">Category</label>
         <select class="form-select" id="inputCategory">
             <option value="" disabled selected>---</option>
-            <option>Nudeln</option>
             <option>Fleisch</option>
             <option>Auflauf</option>
-            <option>Kartoffeln</option>
             <option>Reis</option>
+            <option>Nudeln</option>
+            <option>Kartoffeln</option>
+            <option>Suppen/Eintopf</option>
+            <option>Divers</option>
         </select>
     </div>
     <br/>
-    <button class="btn btn-primary" onclick="sendData()">Submit</button>
+    <button class="btn btn-primary" onclick="sendData(event)">Submit</button>
 </form>
-
-<div id="testDisplay" class="container">Hier sollte die Meal JSON angezeigt werden</div>
 <div id="backendResponse" class="container"></div>
 
-<button class="btn" onclick="test()">Test</button>
+<!------------------- Generate Meals for next week and shooping list -------------------->
+<div id="mealsGenerator">
+    <h1 align="center"><b>Shopping List</b></h1>
+    <br/>
 
-<br/>
-<br/>
 
-<table class="table table-dark">
-    <thead>
-    <tr>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col">Ingredients</th>
-        <th scope="col">Category</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">Monday</th>
-        <td>Spagehtti</td>
-        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
-        <td>Nudeln</td>
-    </tr>
-    <tr>
-        <th scope="row">Tuesday</th>
-        <td>Spagehtti</td>
-        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
-        <td>Nudeln</td>
-    </tr>
-    <tr>
-        <th scope="row">Wednesday</th>
-        <td>Spagehtti</td>
-        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
-        <td>Nudeln</td>
-    </tr>
-    <tr>
-        <th scope="row">Thursday</th>
-        <td>Spagehtti</td>
-        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
-        <td>Nudeln</td>
-    </tr>
-    <tr>
-        <th scope="row">Saturday</th>
-        <td>Spagehtti</td>
-        <td>["Spaghetti 500g", "gehackte Tomaten", "Parmesan", "Fertigtütte Spaghetti"]</td>
-        <td>Nudeln</td>
-    </tr>
-    </tbody>
-</table>
+    <table id="categoryCountTable" class="table table-dark table-borderless">
+        <thead>
+            <tr>
+                <th scope="categoryLabel"><label for="category1" class="categoryLabel">Count Fleisch:</label></th>
+                <th scope="categoryLabel"><label for="category2" class="categoryLabel">Count Auflauf:</label></th>
+                <th scope="categoryLabel"><label for="category3" class="categoryLabel">Count Reis:</label></th>
+                <th scope="categoryLabel"><label for="category4" class="categoryLabel">Count Nudeln:</label></th>
+                <th scope="categoryLabel"><label for="category5" class="categoryLabel">Count Kartoffeln:</label></th>
+                <th scope="categoryLabel"><label for="category6" class="categoryLabel">Count Suppen/Eintopf:</label></th>
+                <th scope="categoryLabel"><label for="category7" class="categoryLabel">Count Divers:</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="number" class="form-custom" id="category1" name="category1" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category2" name="category2" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category3" name="category3" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category4" name="category4" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category5" name="category5" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category6" name="category6" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category7" name="category7" min="0" max="7" value="0"/></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" onClick="queryMealsByCategoryCount()">Fetch meals according to counter above</button>
+    <br/>
 
-<button type="submit" class="btn btn-primary">Print shopping list</button>
-<button type="submit" class="btn btn-warning">Regenerate list</button>
+    <br/>
+    <button class = "btn btn-primary" onclick="fetchMeals()">Fetch all meals</button>
+    </br>
+
+
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <!-- <th scope="col"></th> -->
+            <th scope="col">Name</th>
+            <th scope="col">notMonWed</th>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Category</th>
+        </tr>
+        </thead>
+        <tbody id="shoppingListTableBody">
+
+
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Print shopping list</button>
+    <button type="submit" class="btn btn-warning" onclick="removeAllRows()">Clear List</button>
+</div>
 
 </body>
 </html>

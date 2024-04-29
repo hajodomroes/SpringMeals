@@ -1,11 +1,7 @@
 package hajo.meals.backend;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class DBConnection {
+    /*
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     Statement statement = null;
@@ -63,7 +59,7 @@ public class DBConnection {
             System.out.println("Error in getData: " + e);
         }
         return ArrayofArrays;
-    }*/
+    }
 
     public void updateData(String query) {
         try {
@@ -78,4 +74,5 @@ public class DBConnection {
         String query = "INSERT INTO `mealsdatabase`.`mealslist` (`name`, `complexlevel`, `ingrediants`, `category`) VALUES ('" + name + "', '" + lvl + "', '" + ingrediants + "', '" + category + "');";
         updateData(query);
     }
+    */
 }
