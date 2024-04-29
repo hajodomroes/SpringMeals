@@ -4,7 +4,6 @@ import java.sql.*;
 
 
 public class Main {
-
         public static void connect() {
             Connection conn = null;
             try {
