@@ -11,23 +11,6 @@ import java.util.Map;
 @RequestMapping("/api")
 public class Controller {
 
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello from Spring Web!";
-    }
-    /*
-    @PostMapping("/addMeal/{name}/{onlyMonWed}/{ingredients}/{category}")
-    public String processData(@PathVariable String name, @PathVariable Integer onlyMonWed, @PathVariable HashMap<String, String> ingredients, @PathVariable String category) {
-        /*
-        InsertApp insertApp = new InsertApp();
-        insertApp.insertMeal(2, name, onlyMonWed, category);
-        insertApp.insertIngredients(name, ingredients);
-
-
-        return "Successfully added following meal to database: ";
-    }
-    */
-
     @PostMapping("/addMeal")
     public String processData(@RequestBody Map<String, Object> meal) {
         String name = meal.get("name").toString();
