@@ -5906,6 +5906,9 @@ textarea.form-control-lg {
   background-clip: padding-box;
   border: var(--bs-popover-border-width) solid var(--bs-popover-border-color);
   border-radius: var(--bs-popover-border-radius);
+  margin-left: 30px;
+  margin-right: 30px;
+  left: 0 !important;
 }
 .popover .popover-arrow {
   display: block;

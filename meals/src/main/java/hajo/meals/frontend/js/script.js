@@ -180,6 +180,7 @@
 
                 var nameCell = document.createElement('td');
                 nameCell.textContent = name;
+                nameCell.classList.add("name");
                 row.appendChild(nameCell);
 
                 var notMonWedCell = document.createElement('td');
@@ -197,10 +198,12 @@
 
                   var liIngredients = document.createElement('li');
                   liIngredients.textContent = key;
+                  liIngredients.classList.add("ingredient");
                   ulIngredients.appendChild(liIngredients);
 
                   var liQuantity = document.createElement('li');
                   liQuantity.textContent = value;
+                  liQuantity.classList.add("quantity");
                   ulQuantity.appendChild(liQuantity);
                 }
                 ingredientsCell.appendChild(ulIngredients);
@@ -254,6 +257,101 @@
                             tableAddMeal(name, notMonWed, ingredientsMap, category);
                         });
                     })
+    }
+
+    function closeLoginForm() {
+        document.getElementById("loginForm").style.display = "none";
+    }
+
+    function changeLoginStatus() {
+        var profileIcon = document.getElementById("loginStatus");
+        profileIcon.classList.toggle("bi-person-fill-lock");
+        profileIcon.classList.toggle("bi-person-check-fill");
+
+        document.getElementById("loginForm").style.display = "block";
+
+        var loginAlert = $("#login-alert");
+        var loginText = document.getElementById("login-text");
+        if (profileIcon.classList.contains("bi-person-fill-lock")) {
+            loginText.innerHTML = "logout successful";
+            loginAlert.fadeIn(1000);
+            loginAlert.fadeOut(3000);
+        } else if (profileIcon.classList.contains("bi-person-check-fill")) {
+            loginText.innerHTML = "login successful";
+            loginAlert.fadeIn(1000);
+            loginAlert.fadeOut(3000);
+        }
+
+    }
+
+    function closeLoginAlert() {
+        var loginAlert = document.getElementById("login-alert");
+        loginAlert.style.display = "none";
+    }
+
+
+    function toggleBlur() {
+        var shoppingList = document.getElementById("shoppingList");
+        shoppingList.classList.toggle("fullscreen-container");
+        var shoppingList = document.getElementById("shoppingList");
+        if (shoppingList.style.display = "block") {
+        shoppingList.style.display = "none";
+        }
+    }
+
+    function showShoppingList() {
+        toggleBlur();
+        var shoppingList = document.getElementById("shoppingList");
+        shoppingList.style.display = "block";
+        var ingredientQuantityMap = extractShoppingList();
+        var tableBody = document.getElementById("shoppingListTableBody2");
+
+        ingredientQuantityMap.forEach(function(value, key) {
+            var row = tableBody.insertRow();
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            var checkBoxCell = document.createElement("input");
+            checkBoxCell.type = "checkbox";
+
+            cell1.textContent = key;
+            cell2.textContent = value;
+            cell3.appendChild(checkBoxCell);
+        });
+    }
+
+    function extractShoppingList() {
+        var allIngredients = document.getElementsByClassName("ingredient");
+        var ingredientsArray = [];
+        // Ingredients Array
+        Array.prototype.forEach.call(allIngredients, function(ingredient) {
+            ingredientsArray.push(ingredient.textContent);
+        });
+        // Quantity Array
+        var allQuantities = document.getElementsByClassName("quantity");
+        var quantitiesArray = [];
+        Array.prototype.forEach.call(allQuantities, function(quantity) {
+            quantitiesArray.push(quantity.textContent);
+        });
+        // Ingredient-Quantity Map
+        var ingredientQuantityMap = new Map();
+        Array.prototype.forEach.call(allIngredients, function(ingredient, index) {
+            var quantity = allQuantities[index].textContent;
+            /*
+            if (ingredientQuantityMap.has(ingredient.textContent)) {
+                var currentQuantity = ingredientQuantityMap.get(ingredient.textContent);
+                var cleanCurrentQuantity = parseInt(currentQuantity.replace(/[^0-9]/g, ''));
+                var cleanQuantity = parseInt(quantity.replace(/[^0-9]/g, ''));
+
+                var newQuantity = cleanCurrentQuantity + cleanQuantity;
+                ingredientQuantityMap.set(ingredient.textContent, quantity);
+
+            }
+            */
+           ingredientQuantityMap.set(ingredient.textContent, quantity);
+        });
+        return ingredientQuantityMap;
     }
 
     function test() {
