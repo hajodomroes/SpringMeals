@@ -195,12 +195,10 @@
 
                 var keyList = ingredientsMap.keys();
                 for (const [key, value] of ingredientsMap) {
-
                   var liIngredients = document.createElement('li');
                   liIngredients.textContent = key;
                   liIngredients.classList.add("ingredient");
                   ulIngredients.appendChild(liIngredients);
-
                   var liQuantity = document.createElement('li');
                   liQuantity.textContent = value;
                   liQuantity.classList.add("quantity");
@@ -208,23 +206,33 @@
                 }
                 ingredientsCell.appendChild(ulIngredients);
                 quantityCell.appendChild(ulQuantity);
-
-                //alert(name, notMonWed, ingredients, category);
-                /*
-                ingredients.forEach(function(ingredient) {
-                    var li = document.createElement('li');
-                    li.textContent = ingredient;
-                    ul.appendChild(li);
-                });
-                ingredientsCell.appendChild(ul);
-                */
                 row.appendChild(ingredientsCell);
                 row.appendChild(quantityCell);
+
                 var categoryCell = document.createElement('td');
                 categoryCell.textContent = category;
                 row.appendChild(categoryCell);
 
+                var checkBoxCell = document.createElement("td");
+                var checkBox = document.createElement("input");
+                checkBox.classList.add("form-check-input");
+                checkBox.type = "checkbox";
+                checkBoxCell.appendChild(checkBox);
+                row.appendChild(checkBoxCell);
+
                 tbody.appendChild(row);
+    }
+
+    function keepCheckedMeals() {
+        var tbody = document.getElementById("shoppingListTableBody");
+        var allRows = tbody.getElementsByTagName("tr");
+
+        for (var i = 0; i < allRows.length; i++) {
+            var currentRow = allRows[i];
+            console.log(currentRow);
+            var checkBox = currentRow.getElementsByClassName("form-check-input");
+            console.log(checkBox);
+        }
     }
 
     function queryMealsByCategoryCount() {

@@ -126,13 +126,13 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="number" class="form-custom" id="category1" name="category1" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category1" name="category1" min="0" max="7" value="1"/></td>
                 <td><input type="number" class="form-custom" id="category2" name="category2" min="0" max="7" value="0"/></td>
                 <td><input type="number" class="form-custom" id="category3" name="category3" min="0" max="7" value="0"/></td>
-                <td><input type="number" class="form-custom" id="category4" name="category4" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category4" name="category4" min="0" max="7" value="1"/></td>
                 <td><input type="number" class="form-custom" id="category5" name="category5" min="0" max="7" value="0"/></td>
                 <td><input type="number" class="form-custom" id="category6" name="category6" min="0" max="7" value="0"/></td>
-                <td><input type="number" class="form-custom" id="category7" name="category7" min="0" max="7" value="0"/></td>
+                <td><input type="number" class="form-custom" id="category7" name="category7" min="0" max="7" value="1"/></td>
             </tr>
         </tbody>
     </table>
@@ -143,6 +143,7 @@
     <button class = "btn btn-primary" onclick="fetchMeals()">Fetch all meals</button>
     </br>
 
+    <button onclick="keepCheckedMeals()">TEST</button>
 
     <table class="table table-dark">
         <thead>
@@ -153,10 +154,10 @@
             <th scope="col">Ingredients</th>
             <th scope="col">Quantity</th>
             <th scope="col">Category</th>
+            <th scope="col">Keep</th>
         </tr>
         </thead>
         <tbody id="shoppingListTableBody">
-
 
         </tbody>
     </table>
