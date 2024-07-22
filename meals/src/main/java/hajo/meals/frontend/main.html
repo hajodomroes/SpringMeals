@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>MealsGenereator</title>
     <script src="./js/script.js"></script>
+    <script src="./js/meals.js"></script>
+    <script src="./js/login.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/font-awesome.min.css">
@@ -14,176 +16,181 @@
 </head>
 <body data-bs-theme="dark">
 
-<div class="hiddenOnStart alert alert-success" id="login-alert">
-    <button class="btn btn-danger btn-sm" onclick="closeLoginAlert()">x</button>
-    <strong id="login-text">Login successful </strong>
-</div>
-
-<div class="center">
-<pre>
-
-███╗   ███╗ ███████╗  █████╗  ██╗       ██████╗      ██████╗  ███████╗ ███╗  ██╗ ███████╗ ██████╗   █████╗  ████████╗  █████╗  ██████╗
- ████╗ ████║ ██╔════╝ ██╔══██╗ ██║      ██╔════╝     ██╔════╝  ██╔════╝ ████╗ ██║ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝ ██╔══██╗ ██╔══██╗
- ██╔████╔██║ █████╗   ███████║ ██║      ╚█████╗      ██║  ██╗  █████╗   ██╔██╗██║ █████╗   ██████╔╝ ███████║    ██║    ██║  ██║ ██████╔╝
- ██║╚██╔╝██║ ██╔══╝   ██╔══██║ ██║       ╚═══██╗     ██║  ╚██╗ ██╔══╝   ██║╚████║ ██╔══╝   ██╔══██╗ ██╔══██║    ██║    ██║  ██║ ██╔══██╗
- ██║ ╚═╝ ██║ ███████╗ ██║  ██║ ███████╗ ██████╔╝     ╚██████╔╝ ███████╗ ██║ ╚███║ ███████╗ ██║  ██║ ██║  ██║    ██║    ╚█████╔╝ ██║  ██║
-
-</pre>
-</div>
-<!------------------- Navigating Bar -------------------->
-<div class="topnav d-flex justify-content-between">
-    <div>
-        <a class="active" href="#mealsGenerator" onclick="showmealsGenerator()" id="mealsGeneratorButton">Meals Generator</a>
-        <a href="#addMeal" onclick="showAddMealToDB()" id="addMealsToDBButton">Add meal to DB</a>
+    <div class="hiddenOnStart alert alert-success" id="login-alert">
+        <button class="btn btn-danger btn-sm" onclick="closeLoginAlert()">x</button>
+        <strong id="login-text">Login successful </strong>
     </div>
-    <div>
-        <button class="btn btn-lg" onclick="changeLoginStatus()"><i id="loginStatus" class="bi-person-fill-lock"></i></button>
-    </div>
-</div>
 
-<div class="form-popup" id="loginForm">
-    <form>
+
+    <div class="center">
+        <pre>
+
+        ███╗   ███╗ ███████╗  █████╗  ██╗       ██████╗      ██████╗  ███████╗ ███╗  ██╗ ███████╗ ██████╗   █████╗  ████████╗  █████╗  ██████╗
+         ████╗ ████║ ██╔════╝ ██╔══██╗ ██║      ██╔════╝     ██╔════╝  ██╔════╝ ████╗ ██║ ██╔════╝ ██╔══██╗ ██╔══██╗ ╚══██╔══╝ ██╔══██╗ ██╔══██╗
+         ██╔████╔██║ █████╗   ███████║ ██║      ╚█████╗      ██║  ██╗  █████╗   ██╔██╗██║ █████╗   ██████╔╝ ███████║    ██║    ██║  ██║ ██████╔╝
+         ██║╚██╔╝██║ ██╔══╝   ██╔══██║ ██║       ╚═══██╗     ██║  ╚██╗ ██╔══╝   ██║╚████║ ██╔══╝   ██╔══██╗ ██╔══██║    ██║    ██║  ██║ ██╔══██╗
+         ██║ ╚═╝ ██║ ███████╗ ██║  ██║ ███████╗ ██████╔╝     ╚██████╔╝ ███████╗ ██║ ╚███║ ███████╗ ██║  ██║ ██║  ██║    ██║    ╚█████╔╝ ██║  ██║
+
+        </pre>
+    </div>
+
+
+    <!------------------- Navigating Bar -------------------->
+    <div class="topnav d-flex justify-content-between">
+        <div>
+            <a class="active" href="#mealsGenerator" onclick="showMealsGenerator()" id="mealsGeneratorButton">Meals Generator</a>
+            <a href="#addMeal" onclick="showAddMealToDB()" id="addMealsToDBButton">Add meal to DB</a>
+        </div>
+        <div>
+            <button class="btn btn-lg" onclick="changeLoginStatus()"><i id="loginStatus" class="bi-person-fill-lock"></i></button>
+        </div>
+    </div>
+
+    <div class="form-popup" id="loginForm">
+        <form>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="password">
+            </div>
+            <button class="btn btn-primary" onclick="closeLoginForm()">Submit</button>
+        </form>
+    </div>
+    <br/>
+
+
+    <!------------------- Add Meal to DB Form -------------------->
+    <form id="addMealForm" class="hiddenOnStart">
+        <h1 align="center"><b>Add meal to DB</b></h1>
+        <br/>
         <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" placeholder="password">
+            <label for="inputMealName">Meal name</label>
+            <input class="form-control" id="inputMealName" placeholder="Enter meal name">
         </div>
-        <button class="btn btn-primary" onclick="closeLoginForm()">Submit</button>
+
+        <br/>
+
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="notMonWed">
+            <label class="form-check-label" for="notMonWed">Meal cannot be cooked from Monday - Wednesday</label>
+        </div>
+
+        <br/>
+
+        <div class="form-group" id="mealTableBody">
+            <div class="row">
+                <div class="col">Name</div>
+                <div class="col">Quantity</div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row">
+                <input class="col form-control">
+                <input class="col form-control">
+                <button class="col-1 btn btn-primary" onclick="addRow(event)">
+                    <i class="fa fa-plus"></i>
+                </button>
+                <button class="col-1 btn btn-primary" onclick="deleteRow(event)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputCategory">Category</label>
+            <select class="form-select" id="inputCategory">
+                <option value="" disabled selected>---</option>
+                <option>Fleisch</option>
+                <option>Auflauf</option>
+                <option>Reis</option>
+                <option>Nudeln</option>
+                <option>Kartoffeln</option>
+                <option>Suppen/Eintopf</option>
+                <option>Divers</option>
+            </select>
+        </div>
+        <br/>
+        <button class="btn btn-primary" onclick="sendData(event)">Submit</button>
     </form>
-</div>
-
-<br/>
-<!------------------- Add Meal to DB Form -------------------->
-<form id="addMealForm" class="hiddenOnStart">
-    <h1 align="center"><b>Add meal to DB</b></h1>
-    <br/>
-    <div class="form-group">
-        <label for="inputMealName">Meal name</label>
-        <input class="form-control" id="inputMealName" placeholder="Enter meal name">
-    </div>
-
-    <br/>
-
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="notMonWed">
-        <label class="form-check-label" for="notMonWed">Meal cannot be cooked from Monday - Wednesday</label>
-    </div>
-
-    <br/>
-
-    <div class="form-group" id="mealTableBody">
-        <div class="row">
-            <div class="col">Name</div>
-            <div class="col">Quantity</div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-            <input class="col form-control">
-            <input class="col form-control">
-            <button class="col-1 btn btn-primary" onclick="addRow(event)">
-                <i class="fa fa-plus"></i>
-            </button>
-            <button class="col-1 btn btn-primary" onclick="deleteRow(event)">
-                <i class="fa fa-trash"></i>
-            </button>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="inputCategory">Category</label>
-        <select class="form-select" id="inputCategory">
-            <option value="" disabled selected>---</option>
-            <option>Fleisch</option>
-            <option>Auflauf</option>
-            <option>Reis</option>
-            <option>Nudeln</option>
-            <option>Kartoffeln</option>
-            <option>Suppen/Eintopf</option>
-            <option>Divers</option>
-        </select>
-    </div>
-    <br/>
-    <button class="btn btn-primary" onclick="sendData(event)">Submit</button>
-</form>
-<div id="backendResponse" class="container"></div>
-
-<!------------------- Generate Meals for next week and shooping list -------------------->
-<div id="mealsGenerator">
-    <h1 align="center"><b>Shopping List</b></h1>
-    <br/>
+    <div id="backendResponse" class="container"></div>
 
 
-    <table id="categoryCountTable" class="table table-dark table-borderless">
-        <thead>
-            <tr>
-                <th scope="categoryLabel"><label for="category1" class="categoryLabel">Count Fleisch:</label></th>
-                <th scope="categoryLabel"><label for="category2" class="categoryLabel">Count Auflauf:</label></th>
-                <th scope="categoryLabel"><label for="category3" class="categoryLabel">Count Reis:</label></th>
-                <th scope="categoryLabel"><label for="category4" class="categoryLabel">Count Nudeln:</label></th>
-                <th scope="categoryLabel"><label for="category5" class="categoryLabel">Count Kartoffeln:</label></th>
-                <th scope="categoryLabel"><label for="category6" class="categoryLabel">Count Suppen/Eintopf:</label></th>
-                <th scope="categoryLabel"><label for="category7" class="categoryLabel">Count Divers:</label></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="number" class="form-custom" id="category1" name="category1" min="0" max="7" value="1"/></td>
-                <td><input type="number" class="form-custom" id="category2" name="category2" min="0" max="7" value="0"/></td>
-                <td><input type="number" class="form-custom" id="category3" name="category3" min="0" max="7" value="0"/></td>
-                <td><input type="number" class="form-custom" id="category4" name="category4" min="0" max="7" value="1"/></td>
-                <td><input type="number" class="form-custom" id="category5" name="category5" min="0" max="7" value="0"/></td>
-                <td><input type="number" class="form-custom" id="category6" name="category6" min="0" max="7" value="0"/></td>
-                <td><input type="number" class="form-custom" id="category7" name="category7" min="0" max="7" value="1"/></td>
-            </tr>
-        </tbody>
-    </table>
-    <button class="btn btn-primary" onClick="queryMealsByCategoryCount()">Fetch meals according to counter above</button>
-    <br/>
+    <!------------------- Generate Meals for next week and shooping list -------------------->
+    <div id="mealsGenerator">
+        <h1 align="center"><b>Shopping List</b></h1>
+        <br/>
 
-    <br/>
-    <button class = "btn btn-primary" onclick="fetchMeals()">Fetch all meals</button>
-    </br>
 
-    <button onclick="keepCheckedMeals()">TEST</button>
+        <table id="categoryCountTable" class="table table-dark table-borderless">
+            <thead>
+                <tr>
+                    <th scope="categoryLabel"><label for="category1" class="categoryLabel">Count Fleisch:</label></th>
+                    <th scope="categoryLabel"><label for="category2" class="categoryLabel">Count Auflauf:</label></th>
+                    <th scope="categoryLabel"><label for="category3" class="categoryLabel">Count Reis:</label></th>
+                    <th scope="categoryLabel"><label for="category4" class="categoryLabel">Count Nudeln:</label></th>
+                    <th scope="categoryLabel"><label for="category5" class="categoryLabel">Count Kartoffeln:</label></th>
+                    <th scope="categoryLabel"><label for="category6" class="categoryLabel">Count Suppen/Eintopf:</label></th>
+                    <th scope="categoryLabel"><label for="category7" class="categoryLabel">Count Divers:</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="number" class="form-custom" id="category1" name="category1" min="0" max="7" value="1"/></td>
+                    <td><input type="number" class="form-custom" id="category2" name="category2" min="0" max="7" value="0"/></td>
+                    <td><input type="number" class="form-custom" id="category3" name="category3" min="0" max="7" value="0"/></td>
+                    <td><input type="number" class="form-custom" id="category4" name="category4" min="0" max="7" value="1"/></td>
+                    <td><input type="number" class="form-custom" id="category5" name="category5" min="0" max="7" value="0"/></td>
+                    <td><input type="number" class="form-custom" id="category6" name="category6" min="0" max="7" value="0"/></td>
+                    <td><input type="number" class="form-custom" id="category7" name="category7" min="0" max="7" value="1"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" onClick="queryMealsByCategoryCount()">Fetch meals according to counter above</button>
+        <br/>
 
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <!-- <th scope="col"></th> -->
-            <th scope="col">Name</th>
-            <th scope="col">notMonWed</th>
-            <th scope="col">Ingredients</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Category</th>
-            <th scope="col">Keep</th>
-        </tr>
-        </thead>
-        <tbody id="shoppingListTableBody">
+        <br/>
+        <button class = "btn btn-primary" onclick="fetchMeals()">Fetch all meals</button>
+        </br>
 
-        </tbody>
-    </table>
+        <button onclick="keepCheckedMeals()">TEST</button>
 
-    <button type="submit" class="btn btn-primary" onclick="showShoppingList()">Show shopping list</button>
-    <button type="submit" class="btn btn-warning" onclick="removeAllRows()">Clear List</button>
-</div>
-
-<div class="hiddenOnStart" id="shoppingList">
-    <div class="centered-div">
-        <table class="table table-dark" id="table">
+        <table class="table table-dark">
             <thead>
             <tr>
+                <!-- <th scope="col"></th> -->
+                <th scope="col">Name</th>
+                <th scope="col">notMonWed</th>
                 <th scope="col">Ingredients</th>
                 <th scope="col">Quantity</th>
-                <th scope="col"></th>
+                <th scope="col">Category</th>
+                <th scope="col">Keep</th>
             </tr>
             </thead>
-            <tbody id="shoppingListTableBody2">
+            <tbody id="shoppingListTableBody">
 
             </tbody>
         </table>
-        <button class="btn btn-primary" onClick="toggleBlur()">Close</button>
+
+        <button type="submit" class="btn btn-primary" onclick="showShoppingList()">Show shopping list</button>
+        <button type="submit" class="btn btn-warning" onclick="removeAllRows()">Clear List</button>
     </div>
 
-</div>
+    <div class="hiddenOnStart" id="shoppingList">
+        <div class="centered-div">
+            <table class="table table-dark" id="table">
+                <thead>
+                <tr>
+                    <th scope="col">Ingredients</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody id="shoppingListTableBody2">
+
+                </tbody>
+            </table>
+            <button class="btn btn-primary" onClick="toggleBlur()">Close</button>
+        </div>
+
+    </div>
 
 </body>
 </html>
